@@ -18,19 +18,26 @@ function getRepoContributors(repoOwner, repoName, cb) {
   request(options, function(err, res, body) {
     cb(err, body);
   });
-
-
 }
+// var err = "not enough arguments"
 
+// if (params.length < 2) {
+//   console.log("Errors: ", err);
+//   return;
+// }
 
 getRepoContributors(params[0], params[1], function(err, result) {
-  console.log("Errors:", err);
-
-  result.forEach(function(id) {
-    console.log(id.avatar_url);
-    var path = "./avatars/" + id.login +".jpg"
-    downloadImageByURL(id.avatar_url, path);
-  })
+  var err = "not enough arguments"
+  if (params.length < 2) {
+    console.log("Errors: ", err);
+    return;
+  } else {
+    result.forEach(function(id) {
+      console.log(id.avatar_url);
+      var path = "./avatars/" + id.login +".jpg"
+      downloadImageByURL(id.avatar_url, path);
+    })
+  }
 });
 
 function downloadImageByURL(url, filePath) {
